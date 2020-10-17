@@ -14,7 +14,7 @@ namespace AddressBookSystemUsingCollection
     /// CREATES ADDRESSBOOKMAIN CLASS TO DEFINE REQUIRED METHODS TO ACCESS CONTACT DETAILS OF A PERSON
     /// OBJECT OF THIS CLASS IS STORED IN THE SYSTEM AS A PARTICULAR ADDRESS BOOK WITH A NAME
     /// </summary>
-    class AddressBookMain
+    public class AddressBookMain
     {
         /// <summary>
         /// UC 5 : THE LIST STORES MULTIPLE CONTACTS THE USER ADDS
@@ -61,8 +61,22 @@ namespace AddressBookSystemUsingCollection
             string email = Console.ReadLine();
 
             Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-            contactList.Add(contact);
-            Console.WriteLine("Contact " + firstName + " " + lastName + " added successfully");
+            bool flag = false;
+            foreach (var v in contactList)
+            {
+                /// CALLING OVERRIDDEN Equals() METHOD WITH EACH OBJECT IN CONTACTLIST AS PARAMETER TO CHECK FOR DUPLICATES
+                if (contact.Equals(v))
+                {
+                    Console.WriteLine("\n A Contact already exists with the entered name, please enter a different name to add new contact");
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag == false)
+            {
+                contactList.Add(contact);
+                Console.WriteLine("\nContact " + firstName + " " + lastName + " added successfully");
+            }
         }
 
         /// <summary>
@@ -97,9 +111,9 @@ namespace AddressBookSystemUsingCollection
         /// </summary>
         public void ViewAllContacts()
         {
-            foreach(var v in contactList)
+            foreach(var contact in contactList)
             {
-                Console.WriteLine("\nFullName: " + v.firstName + " " + v.lastName + "\nAddress: " + v.address + "\nCity: " + v.city + "\nState: " + v.state + "\nZip: " + v.zip + "\nPhoneNumber: " + v.phoneNumber + "\nEmail: " + v.email + "\n");                
+                Console.WriteLine("\nFullName: " + contact.firstName + " " + contact.lastName + "\nAddress: " + contact.address + "\nCity: " + contact.city + "\nState: " + contact.state + "\nZip: " + contact.zip + "\nPhoneNumber: " + contact.phoneNumber + "\nEmail: " + contact.email + "\n");                
             }
         }
 
@@ -188,6 +202,6 @@ namespace AddressBookSystemUsingCollection
             }
             if (flag == true)
                 Console.WriteLine("Error:Contact not found");
-        }
+        }        
     }
 }
