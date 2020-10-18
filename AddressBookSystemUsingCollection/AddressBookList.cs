@@ -14,7 +14,7 @@ namespace AddressBookSystemUsingCollection
     /// <summary>
     /// CONTAINS NUMEROUS ADDRESS BOOKS
     /// </summary>
-    class AddressBookList
+    public class AddressBookList
     {
         /// <summary>
         /// STORES THE NUMEROUS ADDRESS BOOKS WITH KEY AS THE ADDDRESS BOOK NAME
